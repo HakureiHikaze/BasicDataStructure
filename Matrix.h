@@ -16,4 +16,4 @@ extern Matrix * MatrixInit(size_t lines, size_t columns);
 extern void MatrixFree(Matrix * pMatrix);
 extern void MatrixSetElement(Matrix * pMatrix, size_t line, size_t column, long pData);
 extern long MatrixGetElement(Matrix * pMatrix, size_t line, size_t column);
-extern void DrawMatrix(Matrix * pMatrix);
+extern void MatrixDraw(Matrix * pMatrix);

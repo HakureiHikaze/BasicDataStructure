@@ -7,7 +7,7 @@
 
 int main(int argc, char** argv){
     Matrix * test = MatrixInit(7,8);
-    DrawMatrix(test);
+    MatrixDraw(test);
     MatrixFree(test);
     return 0;
 }

@@ -36,7 +36,7 @@ long MatrixGetElement(Matrix * pMatrix, size_t line, size_t column){
     return pMatrix->data[(line-1)*pMatrix->columns+column-1];
 }
 
-void DrawMatrix(Matrix * pMatrix){
+void MatrixDraw(Matrix * pMatrix){
     ASSERT(pMatrix);
     ASSERT(pMatrix->data);
     printf_s("\nMatrix: \t0x%p\n", pMatrix);
