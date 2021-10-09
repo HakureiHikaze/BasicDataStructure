@@ -22,3 +22,10 @@ void AMGFree(AMGraph* pAMG){
         if(pAMG->pAM) MatrixFree(pAMG->pAM);
     }
 }
+
+void AMGSetEdge(AMGraph* pMAG, size_t indexA, size_t indexB, long weight){
+    ASSERT(pMAG&&pMAG->pAM&&pMAG->pData);
+    ASSERT(indexA<pMAG->size&&indexB<pMAG->size);
+    MatrixSetElement(pMAG->pAM, indexA+1, indexB+1,weight);
+    pMAG->edge++;
+}

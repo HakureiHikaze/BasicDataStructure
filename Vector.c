@@ -12,7 +12,7 @@ Vector* VectorInit(){
     ASSERT(pRtn);
     return pRtn;
 }
-#define DEBUG
+//#define DEBUG
 void VectorReAlloc(Vector* vector){
 #ifndef DEBUG
     void **pNew = (void **) realloc(vector->pArray, 2 * vector->capacity * sizeof(void *));

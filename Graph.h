@@ -17,3 +17,4 @@ extern AMGraph * AMGInit(size_t size);
 extern void AMGFree(AMGraph* pAMG);
 extern Vector * AMGDFT(AMGraph* pAMG);
 extern Vector * AMGBFT(AMGraph* pAMG);
+extern void AMGSetEdge(AMGraph* pMAG, size_t indexA, size_t indexB, long weight);
