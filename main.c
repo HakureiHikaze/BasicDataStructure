@@ -8,19 +8,18 @@
 
 int main(int argc, char** argv){
     SeqQueue * test = SQInit();
-    for(size_t i =0; i< 5; i++){
+    for(size_t i =0; i< 512; i++){
         SQEnqueue(test,(void*) i);
-        SQPrint(test,printInt);
     }
-    for(size_t i =0; i< 5; i++){
+    SQPrint(test,printInt);
+    for(size_t i =0; i< 512; i++){
         SQDequeue(test);
-        SQPrint(test,printInt);
     }
-    for(size_t i =0; i< 5; i++){
+    SQPrint(test,printInt);
+    for(size_t i =0; i< 512; i++){
         SQEnqueue(test,(void*) i);
-        SQPrint(test,printInt);
     }
-
+    SQPrint(test,printInt);
     SQFree(test);
     return 0;
 }

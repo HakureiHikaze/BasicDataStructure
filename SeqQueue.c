@@ -5,6 +5,7 @@
 
 #include "SeqQueue.h"
 #include "ASSERT.h"
+#include "utilities.h"
 
 size_t SQIndexing(SeqQueue *, size_t);
 
@@ -16,7 +17,7 @@ SeqQueue *SQInit() {
     pRtn->pData = (void **) calloc(INIT_SIZE, sizeof(void *));
     ASSERT(pRtn->pData);
     pRtn->size = 0;
-    pRtn->capacity = 16;
+    pRtn->capacity = INIT_SIZE;
     pRtn->head = 0;
     pRtn->rear = 0;
     return pRtn;
@@ -57,7 +58,7 @@ void *SQDequeue(SeqQueue *pSQ) {
     void *pRtn = pSQ->pData[pSQ->head];
     if(pSQ->size>1)pSQ->head = SQIndexing(pSQ, pSQ->head + 1);
     pSQ->size--;
-    if (pSQ->size < pSQ->capacity / 4) {
+    if (pSQ->size <= pSQ->capacity / 4) {
         SQRealloc(pSQ, 0);
     }
     return pRtn;
@@ -68,6 +69,7 @@ size_t SQIndexing(SeqQueue *pSQ, size_t raw) {
 }
 
 void SQRealloc(SeqQueue *pSQ, _Bool isLarger) {
+    //SQPrint(pSQ,printInt);
     if (isLarger) {
         size_t old_capacity = pSQ->capacity;
         void **pNew = (void **) realloc(pSQ->pData, 2 * old_capacity * sizeof(void *));
@@ -104,10 +106,11 @@ void SQRealloc(SeqQueue *pSQ, _Bool isLarger) {
             pSQ->pData[i] = pBuffer[i];
         }
         free(pSQ->pData);
-        pSQ->head = 0;
-        pSQ->rear = pSQ->size-1;
         pSQ->pData = pBuffer;
         pSQ->capacity/=2;
+        pSQ->head = 0;
+        if(pSQ->size)pSQ->rear = pSQ->size-1;
+        else pSQ->rear = pSQ->head;
     }
 }
 
@@ -119,29 +122,32 @@ size_t SQGetSize(SeqQueue* pSQ){
 void SQPrint(SeqQueue *pSQ, PrintCallback printCallback) {
     if (!pSQ) {
         printf_s("Null pointer pSQ.\n");
+        printf_s("\n\n");
         return;
     }
     if (SQisEmpty(pSQ)) {
         printf_s("Empty queue.\n");
-        printf_s("Sequence queue:\t0x%p\n", pSQ);
+        //printf_s("Sequence queue:\t0x%p\n", pSQ);
         printf_s("Capacity:\t%zu\nSize:\t\t%zu\nHead:\t\t%zu\nRear:\t\t%zu\n",
                  pSQ->capacity, pSQ->size, pSQ->head, pSQ->rear);
+        printf_s("\n\n");
         return;
     }
-    printf_s("Sequence queue:\t0x%p\n", pSQ);
+    //printf_s("Sequence queue:\t0x%p\n", pSQ);
     printf_s("Capacity:\t%zu\nSize:\t\t%zu\nHead:\t\t%zu\nRear:\t\t%zu\n",
              pSQ->capacity, pSQ->size, pSQ->head, pSQ->rear);
-    printf_s("By physics:\n");
+    printf_s("\nBy physics:\n");
     for (size_t i = 0; i < pSQ->capacity; i++) {
         printCallback(pSQ->pData[i]);
-        if (!((i + 1) % 8)) printf_s("\n");
-        else printf_s("\t");
+        if (!((i + 1) % 10)) printf_s("\n");
+        //else printf_s("\t");
     }
     printf_s("\nBy logic:\n");
     for (size_t i = pSQ->head; i < pSQ->head + pSQ->size; i++) {
         printCallback(pSQ->pData[SQIndexing(pSQ, i)]);
-        if (!((i + 1) % 8)) printf_s("\n");
-        else printf_s("\t");
+        if (!((i + 1) % 10)) printf_s("\n");
+        //else printf_s("\t");
     }
     printf_s("\n\n");
+    fflush(stdout);
 }
