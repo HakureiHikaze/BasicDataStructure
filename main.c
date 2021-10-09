@@ -3,11 +3,24 @@
 // 
 //
 #include <stdio.h>
-#include "Matrix.h"
+#include "SeqQueue.h"
+#include "utilities.h"
 
 int main(int argc, char** argv){
-    Matrix * test = MatrixInit(7,8);
-    MatrixDraw(test);
-    MatrixFree(test);
+    SeqQueue * test = SQInit();
+    for(size_t i =0; i< 5; i++){
+        SQEnqueue(test,(void*) i);
+        SQPrint(test,printInt);
+    }
+    for(size_t i =0; i< 5; i++){
+        SQDequeue(test);
+        SQPrint(test,printInt);
+    }
+    for(size_t i =0; i< 5; i++){
+        SQEnqueue(test,(void*) i);
+        SQPrint(test,printInt);
+    }
+
+    SQFree(test);
     return 0;
 }

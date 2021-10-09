@@ -6,6 +6,7 @@
 #pragma once
 #include <stdlib.h>
 #include <stdio.h>
+#include "PrintCallback.h"
 
 #ifndef INIT_SIZE
 #define INIT_SIZE 16
@@ -22,3 +23,4 @@ extern void SQEnqueue(SeqQueue* pSQ, void* data);
 extern void* SQDequeue(SeqQueue* pSQ);
 extern _Bool SQisEmpty(SeqQueue* pSQ);
 extern size_t SQGetSize(SeqQueue* pSQ);
+extern void SQPrint(SeqQueue* pSQ, PrintCallback printCallback);
