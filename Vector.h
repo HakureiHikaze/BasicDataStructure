@@ -8,7 +8,7 @@
 #include "stdio.h"
 #include "stdbool.h"
 #define SMALL_TO_BIG 1
-#define BIG_TO_SMALL -1
+#define BIG_TO_SMALL (-1)
 
 typedef struct Vector_{
     void** pArray;
