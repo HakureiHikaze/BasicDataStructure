@@ -3,23 +3,26 @@
 // 
 //
 #include <stdio.h>
-#include "SeqQueue.h"
+#include "SeqStack.h"
 #include "utilities.h"
 
 int main(int argc, char** argv){
-    SeqQueue * test = SQInit();
-    for(size_t i =0; i< 512; i++){
-        SQEnqueue(test,(void*) i);
+    SeqStack * test = SStackInit();
+    for(size_t i =0; i< 2147483648; i++){
+        SStackPush(test,(void*) i);
+
     }
-    SQPrint(test,printInt);
-    for(size_t i =0; i< 512; i++){
-        SQDequeue(test);
+    //SStackPrint(test,printInt);
+    for(size_t i =0; i< 2147483648; i++){
+        SStackPop(test);
+
     }
-    SQPrint(test,printInt);
-    for(size_t i =0; i< 512; i++){
-        SQEnqueue(test,(void*) i);
+    //SStackPrint(test,printInt);
+    for(size_t i =0; i< 2147483648; i++){
+        SStackPush(test,(void*) i);
+
     }
-    SQPrint(test,printInt);
-    SQFree(test);
+    //SStackPrint(test,printInt);
+    SStackFree(test);
     return 0;
 }

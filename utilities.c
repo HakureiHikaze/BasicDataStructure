@@ -6,7 +6,7 @@
 #include "utilities.h"
 
 void printInt(void* a){
-    printf_s("%10zu", a);
+    printf_s("%-16zu", a);
 }
 
 char compareInt(void* a, void* b){
