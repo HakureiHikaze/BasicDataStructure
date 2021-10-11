@@ -70,7 +70,7 @@ void *SQDequeue(SeqQueue *pSQ) {
 
 size_t SQIndexing(SeqQueue *pSQ, size_t raw) {
     return raw % (pSQ->capacity);//循环索引实现
-    //todo:只传递pSQ->capasity以提高运行效率
+    //todo:只传递pSQ->capacity以提高运行效率
 }
 
 void SQRealloc(SeqQueue *pSQ, _Bool isLarger) {
